@@ -1,0 +1,15 @@
+{
+    "name": "Neptun",
+    "description": "gazowy olbrzym, ósma, najdalsza planeta w Układzie Słonecznym, czwarta pod względem średnicy i trzecia pod względem masy. Neptun jest ponad 17 razy masywniejszy od Ziemi i masywniejszy od swojego 'bliźniaka' Urana, który ma masę prawie 15 razy większą od masy Ziemi.",
+    "type": "gazowy olbrzym",
+    "mass": "1,02413×10^26 kg",
+    "radius": "24 622 km",
+    "surface_area": "7,6183×10^9 km²",
+    "measurment": "6,254×10^13 km³",
+    "density": "1638 kg/m³",
+    "trading_period": "16,11 h",
+    "rotation_speed": "5,43 km/s",
+    "a": "11,15 m/s²",
+    "escape_velocity": "23,5 km/s",
+    "temperature": "72 K"
+}

@@ -1,0 +1,15 @@
+{
+    "name": "Ziemia",
+    "description": "trzecia, licząc od Słońca, oraz piąta pod względem wielkości planeta Układu Słonecznego. Pod względem średnicy, masy i gęstości jest to największa planeta skalista Układu Słonecznego. Ziemia jest zamieszkana przez miliony gatunków, w tym przez człowieka.",
+    "type": "planeta skalista",
+    "mass": "5,97219×10^24kg",
+    "radius": "6371,008 km",
+    "surface_area": "510 072 000 km²",
+    "measurment": "1,083206916846×1012 km³",
+    "density": "5513 kg/m³",
+    "trading_period": "23,9345 h",
+    "rotation_speed": "7,2921150(1)×10−5 rad/s",
+    "a": "9,80665 m/s²",
+    "escape_velocity": "11,19 km/s",
+    "temperature": "185–331 K"
+}

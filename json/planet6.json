@@ -1,0 +1,15 @@
+{
+    "name": "Saturn",
+    "description": "gazowy olbrzym, szósta planeta Układu Słonecznego pod względem odległości od Słońca, druga po Jowiszu pod względem masy i wielkości.",
+    "type": "gazowy olbrzym",
+    "mass": "5,6834×10^26 kg",
+    "radius": "58 232 km",
+    "surface_area": "4,27×10^10 km²",
+    "measurment": "8,2713×10^14 km³",
+    "density": "687 kg/m³",
+    "trading_period": "10,656 h",
+    "rotation_speed": "35 500 km/h",
+    "a": "10,44 m/s²",
+    "escape_velocity": "35,5 km/s",
+    "temperature": "134 K"
+}

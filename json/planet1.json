@@ -1,0 +1,15 @@
+{
+    "name": "Merkury",
+    "description": "najmniejsza i najbliższa Słońca planeta Układu Słonecznego. Jako planeta dolna znajduje się dla ziemskiego obserwatora zawsze blisko Słońca, dlatego jest trudna do obserwacji. Mimo to należy do planet widocznych gołym okiem i była znana już w starożytności.",
+    "type": "planeta skalista",
+    "mass": "3,3011×10^23 kg",
+    "radius": "2439,7 km",
+    "surface_area": "7,5×10^7 km²",
+    "measurment": "6,083×10^10 km³",
+    "density": "5427 kg/m³",
+    "trading_period": "58 d 15 h 26 m",
+    "rotation_speed": "10,892 km/h",
+    "a": "3,70 m/s²",
+    "escape_velocity": "4,3 km/s",
+    "temperature": "100–700 K"
+}

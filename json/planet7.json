@@ -1,0 +1,15 @@
+{
+    "name": "Uran",
+    "description": "gazowy olbrzym, siódma od Słońca planeta Układu Słonecznego, trzecia pod względem wielkości i czwarta pod względem masy. Nazwa planety pochodzi od Uranosa, greckiego boga, uosobienia nieba, ojca Kronosa i dziada Zeusa.",
+    "type": "gazowy olbrzym",
+    "mass": "8,6813×10^25 kg",
+    "radius": "25 362 km",
+    "surface_area": "8,084×10^9 km²",
+    "measurment": "6,833×10^13 km³",
+    "density": "1271 kg/m³",
+    "trading_period": "−17,24 h",
+    "rotation_speed": "9320 km/h",
+    "a": "8,87 m/s²",
+    "escape_velocity": "21,3 km/s",
+    "temperature": "76 K"
+}

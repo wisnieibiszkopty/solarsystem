@@ -1,0 +1,15 @@
+{
+    "name": "Jowisz",
+    "description": "piąta w kolejności od Słońca i największa planeta Układu Słonecznego. Masa Jowisza jest nieco mniejsza niż jedna tysięczna masy Słońca, a zarazem dwa i pół razy większa niż łączna masa pozostałych planet w Układzie Słonecznym.",
+    "type": "gazowy olbrzym",
+    "mass": "1,89819×10^27 kg",
+    "radius": "69 911 km",
+    "surface_area": "6,21796×10^10 km²",
+    "measurment": "1,43128×10^15 km³",
+    "density": "1326 kg/m³",
+    "trading_period": "9,9250 h",
+    "rotation_speed": "45 360 km/h",
+    "a": "24,79 m/s²",
+    "escape_velocity": "59,5 km/s",
+    "temperature": "165 K"
+}

@@ -1,0 +1,15 @@
+{
+    "name": "Wenus",
+    "description": "druga pod względem odległości od Słońca planeta Układu Słonecznego. Jest trzecim pod względem jasności ciałem niebieskim widocznym na niebie, po Słońcu i Księżycu. Jej obserwowana wielkość gwiazdowa sięga −4,6.",
+    "type": "planeta skalista",
+    "mass": "4,867×1024 kg",
+    "radius": "6051,8 km",
+    "surface_area": "4,60×10^8 km²",
+    "measurment": "9,2843×10^11 km³",
+    "density": "5243 kg/m³",
+    "trading_period": "−243,025 d",
+    "rotation_speed": "6,52 km/h ",
+    "a": "8,87 m/s²",
+    "escape_velocity": "10,36 km/s",
+    "temperature": "737 K"
+}

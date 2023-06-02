@@ -1,0 +1,15 @@
+{
+    "name": "Mars",
+    "description": "Mars – czwarta od Słońca planeta Układu Słonecznego. Krąży między orbitą Ziemi a pasem planetoid, dzielącym go od orbity Jowisza.",
+    "type": "planeta skalista",
+    "mass": "6,4171×10^23 kg",
+    "radius": "3389,5 km",
+    "surface_area": "1,448×10^8 km²",
+    "measurment": "1,6318×10^11 km³",
+    "density": "3933 kg/m³",
+    "trading_period": "24 h 37 min",
+    "rotation_speed": "868,22 km/h",
+    "a": "3,71 m/s²",
+    "escape_velocity": "5,03 km/s",
+    "temperature": "−140,15–19,85 °C"
+}
