@@ -1,18 +1,16 @@
 /////////////
 // TO DO
-// Walidacja formularzy w js
-// Napraw skrypty
-// Gwiazdki dodaj
-// Walidacja na w3s
+// Dodaj edycje plików json
 /////////////
 
+// Ustawienie początkowych danych dla slaidera przy włączeniu strony
 window.onload = function(){
     const filename = 'json/planet0.json';
     displayJSONData(filename);
 }
 
 $(document).ready(function(){
-    // Hide and show content of website
+    // Ukrywamy treść strony jeśli użytkownik chce obejrzeć planety
     $('.hide-and-show').click(function(){
         $('.container-fluid').toggle();
         changeIcon();
@@ -21,6 +19,8 @@ $(document).ready(function(){
     $('.carousel-control-prev').click(changePlanetInformation);
     $('.carousel-control-next').click(changePlanetInformation);
 
+    // Jeżeli przełączamy się na opinie o planetach chowamy szczegóły
+    // Bez tego kodu tworzą się dwa divy pod sobą
     $('#reviews-tab').click(function(){
         $('#planets-details').css("display","none");
         addOpinions();
@@ -30,14 +30,15 @@ $(document).ready(function(){
         $('#planets-details').css("display","flex");
     })
 
-    // change range value
+    // zmienianie odległości gwiazdy od Słońca
     $(document).on('input', '#distance', function(){
-        $('#distance-val').html($(this).val());
+        $('#distance-val').html($(this).val() + " lat świetlnych");
     })
 
-    // Saving data of registrated star
+    // Rejestracja gwiazdy
+    // Sprawdzana jest poprawność danych a następnie
+    // są one przesyłane do localStorage
     $('#submit-star-reg').click(function(){
-       let star = {};
        const name = $('#star').val();
        const owner = $('#owner').val();
        const type = $('#star-type').val();
@@ -47,19 +48,41 @@ $(document).ready(function(){
        } else have_planets = "nie";
        const distance = $('#distance').val();
 
-       star.name = name;
-       star.owner = owner;
-       star.type = type;
-       star.have_planets = have_planets;
-       star.distance = distance;
+       let validation = starValidation();
 
+       if(validation) {
+           let star = {};
+           star.name = name;
+           star.owner = owner;
+           star.type = type;
+           star.have_planets = have_planets;
+           star.distance = distance;
 
-       let stars = JSON.parse(localStorage.getItem("stars"));
-       if(stars === null) stars = [];
-       stars.push(star);
-       localStorage.setItem("stars", JSON.stringify(stars));
+           let stars = JSON.parse(localStorage.getItem("stars"));
+           if (stars === null) stars = [];
+           stars.push(star);
+           localStorage.setItem("stars", JSON.stringify(stars));
+
+           showStars();
+           $("#star-registration-modal").modal('hide');
+
+           let info = $("#star-info");
+           info.html("<strong>Gratulacje!</strong> Udało się poprawnie zajerestrować planetę!\n" +
+               "<button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"alert\" aria-label=\"Close\"></button>");
+           info.addClass("alert alert-success alert-dismissible fade show");
+           info.attr("role","alert");
+
+           $("#star").val(" ");
+           $("#owner").val(" ");
+           $("#star-type").val("protogwiazda");
+           $("#yes").prop("checked", false);
+           $("#no").prop("checked", false);
+           $("#range").val("4");
+           $("#check").prop("checked", false);
+       }
     });
 
+    // wyświetlanie listy zarejestrowanych gwiazd
     $('#show-stars').click(function(){
         let div = $('#star-list');
         if(div.is(':empty')){
@@ -70,6 +93,7 @@ $(document).ready(function(){
         }
     });
 
+    // odznaczenie akutalnie zaznaczonej planety i zaznaczenie nowej
     $('.grid-img').click(function(){
         $('.grid-img').each(function(){
             if($(this).hasClass('grid-active')){
@@ -79,6 +103,9 @@ $(document).ready(function(){
         $(this).addClass('grid-active');
     })
 
+    // Przesyłanie opinii na temat planety
+    // Sprawdzana jest poprawność danych a następnie
+    // są one przesyłane do localStorage
     $('#post-opinion').click(function(){
         let planet;
         $('.grid-img').each(function(){
@@ -92,27 +119,48 @@ $(document).ready(function(){
         const rating = $("#rating").val();
         const opinion = $("#opinion").val();
 
-        let planet_review = {};
-        planet_review.planet = planet;
-        planet_review.name = name;
-        planet_review.email = email;
-        planet_review.rating = rating;
-        planet_review.opinion = opinion;
+        let validation = opinionValidation();
 
-        let opinions = JSON.parse(localStorage.getItem("opinions"));
-        if(opinions === null) opinions = [];
-        opinions.push(planet_review);
-        localStorage.setItem("opinions",JSON.stringify(opinions));
+        if(validation) {
+            let planet_review = {};
+            planet_review.planet = planet;
+            planet_review.name = name;
+            planet_review.email = email;
+            planet_review.rating = rating;
+            planet_review.opinion = opinion;
 
-        alert("Udało się poprawnie dodać opinię o planecie");
+            let opinions = JSON.parse(localStorage.getItem("opinions"));
+            if (opinions === null) opinions = [];
+            opinions.push(planet_review);
+            localStorage.setItem("opinions", JSON.stringify(opinions));
+
+            // odświeżanie zakładki
+            addOpinions();
+            $("#rate-planet-modal").modal('hide');
+
+            // generowanie alertu informującego o sukcesie
+            let info = $("#planet-info");
+            info.html("<strong>Gratulacje!</strong> Udało się wystawić opinię o planecie!\n" +
+                "<button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"alert\" aria-label=\"Close\"></button>");
+            info.addClass("alert alert-success alert-dismissible fade show");
+            info.attr("role","alert");
+
+            // czyszczenie formularza przed ponownym użyciem
+            $("#name").val(" ");
+            $("#email").val(" ");
+            $("#rating").val(" ");
+            $("#opinion").val(" ");
+        }
     })
 
+    // Zmiana strzałek przy rozwijaniu i zwijaniu tekstu
     $('#collapse1').click(function(){changeArrow(1)});
     $('#collapse2').click(function(){changeArrow(2)});
     $('#collapse3').click(function(){changeArrow(3)});
 
 })
 
+// wczytujemy kolejne pliki JSON z informacjami o planetach
 function changePlanetInformation(){
     let n;
     $('.car-item').each(function(){
@@ -146,8 +194,9 @@ function displayJSONData(filename){
         });
 }
 
-function loadJSON(filename) {
-    return fetch(filename)
+// wczytywanie plików z pomocą Fetch API
+async function loadJSON(filename) {
+    return await fetch(filename)
         .then(response => {
             if (!response.ok) {
                 throw new Error('Wystąpił błąd podczas wczytywania pliku JSON.');
@@ -180,7 +229,7 @@ function showStars(){
     let stars_list = document.getElementById('star-list');
 
     let stars = JSON.parse(localStorage.getItem("stars"));
-    if(stars === null){
+    if(stars.length === 0){
         stars_list.innerHTML += "<h4>Nie zajerestrowano jeszcze żadnych gwiazd</h4>";
     } else {
 
@@ -235,7 +284,6 @@ function showStars(){
             }
         })
         stars_list.appendChild(delete_all);
-        stars_list.style.display = "none";
     }
 }
 
@@ -249,11 +297,10 @@ function deleteStar(i){
 function addOpinions(){
     document.getElementById('planets-reviews').innerHTML = "";
     let opinions = JSON.parse(localStorage.getItem("opinions"));
-    if(opinions === null){
+    if(opinions.length === 0){
         $("#planets-reviews")
             .html("<div class='center-header'><h4>Nie pojawiły się jeszcze żadne opinie</h4></div>");
     } else{
-        console.log(opinions);
         let element = document.getElementById("planets-reviews");
         let i, opinion;
         for(i=0;i<opinions.length;i++){
@@ -282,7 +329,7 @@ function deleteOpinion(i){
     addOpinions();
 }
 
-function chechInput(id,regex) {
+function checkInput(id,regex) {
     let input = document.getElementById(id);
     return regex.test(input.value);
 }
@@ -296,11 +343,117 @@ function checkRadio(radio_name){
     }
     return false;
 }
-function checkCheckbox(checkbox_id){
-    let input=document.getElementById(checkbox_id);
-    return input.checked;
+
+function checkPesel(pesel){
+    return pesel.length === 11;
 }
 
+function starValidation(){
+    let star_alert = $("#star-alert");
+    star_alert.empty();
+    star_alert.append("<div id='star-alert-info'></div>");
+    let alert = $("#star-alert-info");
+
+    let validation = true;
+    let message;
+    let close_button = "<button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"alert\" aria-label=\"Close\"></button>";
+    alert.addClass("alert alert-danger alert-dismissible fade show");
+    alert.attr("role","alert");
+
+    if(!checkInput("owner",/^[a-z ,.'-]+$/i)){
+        validation = false;
+        message = "Musisz podać poprawne imię!";
+        alert.html(message + close_button);
+        star_alert.append(alert);
+        return validation;
+    }
+
+    if(!checkPesel($("#pesel").val())){
+        validation = false;
+        message = "Musisz podać poprawny pesel!";
+        alert.html(message + close_button);
+        star_alert.append(alert);
+        return validation;
+    }
+
+    if($("#star").val().length === 0){
+        validation = false;
+        message = "Musisz podać nazwę gwiazdy!";
+        alert.html(message + close_button);
+        star_alert.append(alert);
+        return validation;
+    }
+
+    if(!checkRadio("has-planets")){
+        validation = false;
+        message = "Musisz wybrać czy gwiazda ma mieć planety!";
+        alert.html(message + close_button);
+        star_alert.append(alert);
+        return validation;
+    }
+
+    if(!document.getElementById("check").checked){
+        validation = false;
+        message = "Musisz zaakceptować regulamin! ";
+        alert.html(message + close_button);
+        star_alert.append(alert);
+        return validation;
+    }
+
+    alert.remove();
+    return validation;
+}
+
+function opinionValidation(){
+    let opinion_alert = $("#opinion-alert");
+    opinion_alert.empty();
+    opinion_alert.append("<div id='opinion-alert-info'></div>");
+    let alert = $("#opinion-alert-info");
+
+    let validation = true;
+    let message;
+    let close_button = "<button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"alert\" aria-label=\"Close\"></button>";
+    alert.addClass("alert alert-danger alert-dismissible fade show");
+    alert.attr("role","alert");
+
+    if(!(document.querySelector('.grid-img.grid-active') !== null)){
+        validation = false;
+        message = "Musisz wybrać planetę którą chcesz ocenić!";
+        alert.html(message + close_button);
+        opinion_alert.append(alert);
+        return validation;
+    }
+
+    if(!checkInput("name",/^[a-z ,.'-]+$/i)){
+        validation = false;
+        message = "Musisz podać poprawne imię!";
+        alert.html(message + close_button);
+        opinion_alert.append(alert);
+        return validation;
+    }
+
+    if(!checkInput("email",/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/i)){
+        validation = false;
+        message = "Musisz podać poprawny e-mail!";
+        alert.html(message + close_button);
+        opinion_alert.append(alert);
+        return validation;
+    }
+
+    if(!$.trim($("#opinion").val())){
+        validation = false;
+        message = "Opinia nie może być pusta!";
+        alert.html(message + close_button);
+        opinion_alert.append(alert);
+        return validation;
+    }
+
+    alert.remove();
+    return validation;
+}
+
+// Będzie sprawdzane czy obiekt na stronie jest widoczny
+// jeżeli tak, będzie wykonywało się przejście opisane w klasie .show
 const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
         console.log(entry);

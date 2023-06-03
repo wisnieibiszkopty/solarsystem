@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 <head>
-  <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="/vite.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Układ słoneczny</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css" integrity="sha384-jLKHWM3JRmfMU0A5x5AkjWkw/EYfGUAGagvnfryNV3F9VqM98XiIH7VBGVoxVSc7" crossorigin="anonymous">
@@ -24,7 +24,7 @@
     <div id="about-planets">
       <div id="about-planets-top">
         <div id="information">
-          <h2 id="planet-name" class="hidden left"></h2>
+          <h2 id="planet-name" class="hidden left">Nazwa planety</h2>
           <p id="planet-description" class="hidden left"></p>
         </div>
         <!-- carousel -->
@@ -65,11 +65,11 @@
         <ul class="nav nav-tabs nav-justified" id="about-planets-nav" role="tablist">
           <li class="nav-item">
             <button class="nav-link active" id="detail-tab" data-bs-toggle="tab" data-bs-target="#planets-details"
-                    type="button" role="tab" aria-controls="details" aria-selected="true">Szczegóły</button>
+                    type="button" role="tab" aria-selected="true">Szczegóły</button>
           </li>
           <li class="nav-item">
             <button class="nav-link" id="reviews-tab" data-bs-toggle="tab" data-bs-target="#planets-reviews"
-                    type="button" role="tab" aria-controls="dreviews" aria-selected="false">Opinie</button>
+                    type="button" role="tab" aria-selected="false">Opinie</button>
           </li>
         </ul>
         <div id="about-planets-content" class="tab-content">
@@ -91,12 +91,12 @@
             </div>
           </div>
           <div class="tab-pane fade" id="planets-reviews" role="tabpanel" aria-labelledby="reviews-tab">
-
           </div>
         </div>
       </div>
     </div>
 
+    <div id="star-info"></div>
 
     <div class="flex-container flex-left">
       <div id="star-registration" class="container registration hidden left">
@@ -111,7 +111,7 @@
     </div>
 
     <div class="flex-container center flex-column hidden left">
-      <div id="facts-carousel" class="carousel slide">
+      <div id="facts-carousel" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-indicators">
           <button type="button" data-bs-target="#carousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
           <button type="button" data-bs-target="#carousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -147,11 +147,13 @@
       </div>
     </div>
 
+    <div id="planet-info"></div>
+
     <div class="flex-container flex-right">
       <div id="rate-planet" class="container registration hidden right">
         <h2>Napisz opinię o wybranej planecie Układu Słonecznego</h2>
         <p>Jeśli masz jakieś przemyślenia na temat jednej z planet naszego układu
-        może je tu zapisać w przyjemny sposób z pomocą systemu zalet i wad</p>
+        może je tu zapisać i udostępnić innym użytkownikom!</p>
         <button type="button" class="btn btn-outline-dark btn-lg"
                 data-bs-toggle="modal" data-bs-target="#rate-planet-modal">Oceń planetę!</button>
       </div>
@@ -173,16 +175,16 @@
         <a id="collapse2" class="col-text-2" href="#" data-bs-toggle="collapse" data-bs-target="#col2">
           W jaki sposób się kręcą? <span><i id="icon2" class="bi bi-arrow-down-short"></i></span></a>
         <div id="col2" class="collapse">
-          Aby wprawić planety w ruch użyto równania ruchu po okręgu, na podstawie które wyliczane są współrzędne planet
+          Aby wprawić planety w ruch użyto równania ruchu po okręgu, na podstawie którego wyliczane są współrzędne planet
           na dwóch osiach układu współrzędnych. Jest to przekłamanie, ponieważ w rzeczywistości planety nie kręcą się
           po idealnym okręgu lecz po elipsie, jednak zdecydowałem się na to uproszczenie z powodu znikomych różnic
           w wyglądzie animacji, przy zachowaniu o wiele mniejszej złożoności.
         </div>
         <a id="collapse3" class="col-text-3" href="#" data-bs-toggle="collapse" data-bs-target="#col3">
-          Czy planety fizyka planet opiera się na rzeczywistości? <span><i id="icon3" class="bi bi-arrow-down-short"></i></span></a>
+          Czy fizyka planet opiera się na rzeczywistości? <span><i id="icon3" class="bi bi-arrow-down-short"></i></span></a>
         <div id="col3" class="collapse">
           Zachowana jest jedynie bardzo ogólnie skala, to jest planety są odpowiednio większe od siebie, znajdują się w
-          coraz większych odległościach, oraz kręcą wolniej lub szybciej, jednak zależności te nie są dokładne a bardzo
+          coraz większych odległościach, oraz kręcą się wolniej lub szybciej, jednak zależności te nie są dokładne a bardzo
           uproszczone. O ile skala odległości między planetami i ich wielkości została zachowana, tak nie przedstawiają
           one rzeczywistości - Neptun i Uran znajdują się tak daleko od Słońca że przy próbie zachowania rzeczywistych
           odległości są za daleko by w ogóle móc je wyrenderować!
@@ -210,13 +212,14 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
       <div class="modal-body">
-        <div id="star-alert">
-        </div>
+        <div id="star-alert"></div>
         <form>
           <label for="owner">Imię właściciela: </label>
-          <input type="text" class="form-control" id="owner" placeholder="Wpisz tu swoje imię" name="owner" required>
+          <input type="text" class="form-control" id="owner" placeholder="Wpisz tu swoje imię" name="owner">
+          <label for="pesel">Pesel: </label>
+          <input type="text" class="form-control" id="pesel" placeholder="Wpisz tu swój pesel" name="pesel">
           <label for="star">Nazwa gwiazdy: </label>
-          <input type="text" class="form-control" id="star" placeholder="Wpisz tu nazwę gwiazdy" name="star" required>
+          <input type="text" class="form-control" id="star" placeholder="Wpisz tu nazwę gwiazdy" name="star">
           <label> Rodzaj gwiazdy:
             <select class="form-select" id="star-type">
               <option value="protogwiazda">protogwiazda</option>
@@ -231,7 +234,7 @@
           <div>
             Planety w okół gwiazdy:
             <div class="form-check">
-              <input type="radio" class="form-check-input" id="yes" name="has-planets" value="yes" checked>Tak
+              <input type="radio" class="form-check-input" id="yes" name="has-planets" value="yes">Tak
               <label class="form-check-label" for="yes"></label>
             </div>
             <div class="form-check">
@@ -286,24 +289,22 @@
           <div id="planet-review-left">
           <fieldset>
             <legend>1.Kilka informacji o Tobie</legend>
-            <label for="name">Nazwa: </label>
+            <label for="name">Imię: </label>
             <input type="text" class="form-control" id="name" placeholder="Wpisz tu swoje imię" name="name" required>
             <label for="email">E-mail: </label>
             <input type="text" class="form-control" id="email" placeholder="Wpisz tu swój adres e-mail" name="email" required>
           </fieldset>
           <fieldset id="fieldset-padding">
-            <legend>2. Przyznaj planecie gwiazdki</legend>
-            <!--
-            <div class="stars">
-              <i class="bi bi-star"></i>
-              <i class="bi bi-star"></i>
-              <i class="bi bi-star"></i>
-              <i class="bi bi-star"></i>
-              <i class="bi bi-star"></i>
-            </div>
-            -->
-            <label for="rating">Ocena:</label>
-            <input type="number" id="rating" name="rating" min="1" max="5">
+            <legend>2. Oceń planetę</legend>
+            <label>
+              <select class="form-select" id="rating">
+                <option value="1">Okropna</option>
+                <option value="2">Słaba</option>
+                <option value="3">Średnia</option>
+                <option value="4">Dobra</option>
+                <option value="5">Bardzo dobra</option>
+              </select>
+            </label>
           </fieldset>
           </div>
           <div id="planet-review-right">
@@ -314,6 +315,7 @@
             </fieldset>
           </div>
         </form>
+        <div id="opinion-alert"></div>
         <div class="center">
           <button type="button" id="post-opinion" class="btn">Oceń planete!</button>
         </div>

@@ -188,13 +188,13 @@ header h1 {font-size: 80px;}
 
 .star-delete:hover{color:red;}
 
-#delete_all{
+.delete_all_stars, .delete_all_opinions{
     color: red;
     cursor: pointer;
     font-size: 20px;
 }
 
-#delete_all:hover{text-decoration: underline;}
+.delete_all:hover, .delete_all_opinions:hover{text-decoration: underline;}
 
 #button-center{
     display: flex;
@@ -218,6 +218,19 @@ header h1 {font-size: 80px;}
     flex-direction: row;
     align-items: center;
 }
+
+#star-info, #planet-info{
+    width: 50%;
+    margin: 0 auto 40px;
+}
+
+#star-info a{
+    color: #0f5132;
+    text-decoration: none;
+    font-size: 120%;
+}
+
+#opinion-alert{margin-top: 30px;}
 
 .form-control{ margin-bottom: 12px;}
 
@@ -271,6 +284,11 @@ fieldset, legend{all: revert;}
 #user-stars{
     width: 80%;
     margin-left: 10%;
+}
+
+#show-stars:hover h2{
+    cursor: pointer;
+    text-decoration: underline;
 }
 
 #about{
