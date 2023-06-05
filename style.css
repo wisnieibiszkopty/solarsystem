@@ -188,13 +188,13 @@ header h1 {font-size: 80px;}
 
 .star-delete:hover{color:red;}
 
-.delete_all_stars, .delete_all_opinions{
+#delete_all, .delete_all_opinions{
     color: red;
     cursor: pointer;
     font-size: 20px;
 }
 
-.delete_all:hover, .delete_all_opinions:hover{text-decoration: underline;}
+#delete_all:hover, .delete_all_opinions:hover{text-decoration: underline;}
 
 #button-center{
     display: flex;

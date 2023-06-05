@@ -67,7 +67,7 @@ $(document).ready(function(){
            $("#star-registration-modal").modal('hide');
 
            let info = $("#star-info");
-           info.html("<strong>Gratulacje!</strong> Udało się poprawnie zajerestrować planetę!\n" +
+           info.html("<strong>Gratulacje!</strong> Udało się poprawnie zajerestrować gwiazdę!\n" +
                "<button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"alert\" aria-label=\"Close\"></button>");
            info.addClass("alert alert-success alert-dismissible fade show");
            info.attr("role","alert");
@@ -244,14 +244,14 @@ function showStars(){
 
         table.innerHTML += "<thead></thead><tr><th>Nazwa</th><th>Właściciel" +
             "</th><th>Typ</th><th>Planety</th>" +
-            "<th>Odległość od Słońca</th><th></th><th>Usuń</th></tr></thead><tbody>";
+            "<th>Odległość od Słońca</th><th>Usuń</th></tr></thead><tbody>";
 
         let i, j, values, a;
         for (i = 0; i < stars.length; i++) {
             values = [stars[i].name, stars[i].owner, stars[i].type, stars[i].have_planets, stars[i].distance];
 
             let tr = document.createElement('tr');
-            for (j = 0; j < 7; j++) {
+            for (j = 0; j < 6; j++) {
                 tr.appendChild(document.createElement('td'));
             }
             tr.cells[0].appendChild(document.createTextNode(values[0]));
@@ -259,14 +259,14 @@ function showStars(){
             tr.cells[2].appendChild(document.createTextNode(values[2]));
             tr.cells[3].appendChild(document.createTextNode(values[3]));
             tr.cells[4].appendChild(document.createTextNode(values[4]));
-            a = document.createElement('a');
+            /*a = document.createElement('a');
             a.innerHTML = "Edytuj";
-            tr.cells[5].appendChild(a);
+            tr.cells[5].appendChild(a);*/
             a = document.createElement('a');
             a.classList.add('star-delete');
             a.setAttribute("onclick", "deleteStar(" + i + ")");
             a.innerHTML += "<i class='bi bi-x'></i>";
-            tr.cells[6].appendChild(a);
+            tr.cells[5].appendChild(a);
 
             table.appendChild(tr);
         }
@@ -344,10 +344,6 @@ function checkRadio(radio_name){
     return false;
 }
 
-function checkPesel(pesel){
-    return pesel.length === 11;
-}
-
 function starValidation(){
     let star_alert = $("#star-alert");
     star_alert.empty();
@@ -360,7 +356,7 @@ function starValidation(){
     alert.addClass("alert alert-danger alert-dismissible fade show");
     alert.attr("role","alert");
 
-    if(!checkInput("owner",/^[a-z ,.'-]+$/i)){
+    if(!checkInput("owner",/^[a-z ,.'-]{3,25}$/i)){
         validation = false;
         message = "Musisz podać poprawne imię!";
         alert.html(message + close_button);
@@ -368,7 +364,7 @@ function starValidation(){
         return validation;
     }
 
-    if(!checkPesel($("#pesel").val())){
+    if(!checkInput("pesel", /^[0-9]{11}$/)){
         validation = false;
         message = "Musisz podać poprawny pesel!";
         alert.html(message + close_button);
@@ -424,7 +420,7 @@ function opinionValidation(){
         return validation;
     }
 
-    if(!checkInput("name",/^[a-z ,.'-]+$/i)){
+    if(!checkInput("name",/^[a-z ,.'-]{3,25}$/i)){
         validation = false;
         message = "Musisz podać poprawne imię!";
         alert.html(message + close_button);
